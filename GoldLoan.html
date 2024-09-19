@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Loan Calculator</title>
+    <style>
+        /* styles.css */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5a623, #f76c6c);
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input {
+            width: calc(100% - 16px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #00d084);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #00b37e);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        #result h2 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        #result p {
+            font-size: 36px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Gold Loan Calculator</h1>
+        <form id="loanForm">
+            <label for="goldWeight">Gold Weight (grams):</label>
+            <input type="number" id="goldWeight" required>
+
+            <label for="goldPrice">Gold Price per Gram (in currency):</label>
+            <input type="number" id="goldPrice" required>
+
+            <label for="loanToValueRatio">Loan to Value Ratio (%):</label>
+            <input type="number" id="loanToValueRatio" required>
+
+            <button type="button" onclick="calculateLoan()">Calculate Loan Amount</button>
+        </form>
+        <div id="result">
+            <h2>Loan Amount:</h2>
+            <p id="loanAmount">0</p>
+        </div>
+    </div>
+    <script>
+        // script.js
+        function calculateLoan() {
+            // Get values from the form
+            const goldWeight = parseFloat(document.getElementById('goldWeight').value);
+            const goldPrice = parseFloat(document.getElementById('goldPrice').value);
+            const loanToValueRatio = parseFloat(document.getElementById('loanToValueRatio').value);
+
+            // Validate inputs
+            if (isNaN(goldWeight) || isNaN(goldPrice) || isNaN(loanToValueRatio) || goldWeight <= 0 || goldPrice <= 0 || loanToValueRatio <= 0) {
+                alert("Please enter valid positive numbers.");
+                return;
+            }
+
+            // Calculate the loan amount
+            const totalGoldValue = goldWeight * goldPrice;
+            const loanAmount = (totalGoldValue * loanToValueRatio) / 100;
+
+            // Display the result
+            document.getElementById('loanAmount').textContent = loanAmount.toFixed(2);
+        }
+
+    </script>
+</body>
+
+</html>
